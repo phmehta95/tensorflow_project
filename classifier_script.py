@@ -104,3 +104,51 @@ validation_generator = validation_datagen.flow_from_directory(
 	class_mode='categorical',
   batch_size=126
 )
+
+
+#Model training and building
+
+
+ #Training the NN and building the model
+
+
+#0) Type of model - Sequential. This allows us to build our model up layer by layer - this is just a linear stack of layers.
+
+#1) Convolutional layers - core layer of the Convolutional NN. This takes an image as the input in its matrix representation (3 dimensional if its a colour image (RGB) and 2 dimensional if its a grayscale image). Dot product occurs between matrix and a filter (e.g. a Sobel filter) - filters look for features of the image - e.g. the Sobel filter looks for edges. Edges help with classification!
+
+#2) Pooling layers - Neighbouring pixels tend to have similar values, so convolutional layers produce similar values for pixels next to each other in outputs. E.g. - if we have a filter that finds edges and it finds a strong edge at a certain location chances are that 1 pixel shifted over from this location, we'll find an edge too, but they're all the same edge! Pooling layers fix this problem by "pooling" all the values together in the output. The types of pooling are max, min and average. Max pooling puts the max value of a certain region into the output.
+
+#3) Flatten layer - Turns the image height and width e.g. 5 x 5 into one dimension - 25 pixels long
+
+
+model = tf.keras.models.Sequential([
+    # Note the input shape is the desired size of the image 150x150 with 3 bytes color
+    # This is the first convolution
+    tf.keras.layers.Conv2D(64, (3,3), activation='relu', input_shape=(150, 150, 3)),
+    tf.keras.layers.MaxPooling2D(2, 2),
+    # The second convolution
+    tf.keras.layers.Conv2D(64, (3,3), activation='relu'),
+    tf.keras.layers.MaxPooling2D(2,2),
+    # The third convolution
+    tf.keras.layers.Conv2D(128, (3,3), activation='relu'),
+    tf.keras.layers.MaxPooling2D(2,2),
+    # The fourth convolution
+    tf.keras.layers.Conv2D(128, (3,3), activation='relu'),
+    tf.keras.layers.MaxPooling2D(2,2),
+    # Flatten the results to feed into a DNN
+    tf.keras.layers.Flatten(),
+    tf.keras.layers.Dropout(0.5),
+    # 512 neuron hidden layer
+    tf.keras.layers.Dense(512, activation='relu'),
+    tf.keras.layers.Dense(3, activation='softmax')
+])
+
+
+model.summary()
+
+model.compile(loss = 'categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+
+history = model.fit(train_generator, epochs=25, steps_per_epoch=20, validation_data = validation_generator, verbose = 1, validation_steps=3)
+
+model.save("rps.h5")
+
