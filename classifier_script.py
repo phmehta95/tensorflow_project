@@ -107,7 +107,7 @@ validation_generator = validation_datagen.flow_from_directory(
 
 
 #Model training and building
-
+from keras.callbacks import CSVLogger
 
  #Training the NN and building the model
 
@@ -148,30 +148,17 @@ model.summary()
 
 model.compile(loss = 'categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
 
-history = model.fit(train_generator, epochs=25, steps_per_epoch=20, validation_data = validation_generator, verbose = 1, validation_steps=3)
+csv_logger = CSVLogger("training.log", sep=",", append="False")
+
+history = model.fit(train_generator, epochs=25, steps_per_epoch=20, validation_data = validation_generator, verbose = 1, validation_steps=3,callbacks=[csv_logger])
 
 model.save("rps.h5")  #Saving to .h5 file (can be viewed in HDFview)
 
 
 
- #Plotting the Training and Testing accuracy
-
-import matplotlib.pyplot as plt
-acc = history.history['accuracy']
-val_acc = history.history['val_accuracy']
-loss = history.history['loss']
-val_loss = history.history['val_loss']
-
-epochs = range(len(acc))
-
-plt.plot(epochs, acc, 'r', label='Training accuracy')
-plt.plot(epochs, val_acc, 'b', label='Validation accuracy')
-plt.title('Training and validation accuracy')
-plt.legend(loc=0)
-plt.figure()
 
 
-plt.show()
+
 
 
 
