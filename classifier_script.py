@@ -148,7 +148,7 @@ model.summary()
 
 model.compile(loss = 'categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
 
-csv_logger = CSVLogger("training.log", sep=",", append="False")
+csv_logger = CSVLogger("training.log", separator=",", append="False")
 
 history = model.fit(train_generator, epochs=25, steps_per_epoch=20, validation_data = validation_generator, verbose = 1, validation_steps=3,callbacks=[csv_logger])
 
