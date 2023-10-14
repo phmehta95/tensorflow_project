@@ -137,7 +137,7 @@ model = tf.keras.models.Sequential([
     tf.keras.layers.MaxPooling2D(2,2),
     # Flatten the results to feed into a DNN
     tf.keras.layers.Flatten(),
-    tf.keras.layers.Dropout(0.5),
+    #tf.keras.layers.Dropout(0.5),
     # 512 neuron hidden layer
     tf.keras.layers.Dense(512, activation='relu'),
     tf.keras.layers.Dense(3, activation='softmax')
@@ -148,11 +148,11 @@ model.summary()
 
 model.compile(loss = 'categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
 
-csv_logger = CSVLogger("training.log", separator=",", append="False")
+csv_logger = CSVLogger("training2.log", separator=",", append="False")
 
 history = model.fit(train_generator, epochs=25, steps_per_epoch=20, validation_data = validation_generator, verbose = 1, validation_steps=3,callbacks=[csv_logger])
 
-model.save("rps.h5")  #Saving to .h5 file (can be viewed in HDFview)
+model.save("rps_nodropout.h5")  #Saving to .h5 file (can be viewed in HDFview)
 
 
 

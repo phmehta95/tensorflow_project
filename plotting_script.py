@@ -8,10 +8,10 @@ from keras.callbacks import CSVLogger
 
 #Plotting the Training and Testing accuracy                                    
 
-reconstructed_model = tf.keras.models.load_model("/home/pruthvi/Desktop/tensorflow_project/rps.h5")
+reconstructed_model = tf.keras.models.load_model("/home/pruthvi/Desktop/tensorflow_project/rps_nodropout.h5")
 #history = reconstructed_model.fit(classifier_script.train_generator, epochs=25, steps_per_epoch=20, validation_data = classifier_script.validation_generator, verbose = 1, validation_steps=3)
 
-log_data = pd.read_csv("training.log", sep=',' , engine='python')
+log_data = pd.read_csv("training2.log", sep=',' , engine='python')
 
 
 import matplotlib.pyplot as plt
