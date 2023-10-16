@@ -18,12 +18,12 @@ for filename in os.listdir(directory):
     f = os.path.join(directory, filename)
     print(f)
 
-#    change_bg = alter_bg()
-#    change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
-#    change_bg.color_bg(f, colors = (0,128,0), output_image_name = f_out)
+    change_bg = alter_bg()
+    change_bg.load_pascalvoc_model("deeplabv3_xception_tf_dim_ordering_tf_kernels.h5")
+    change_bg.color_bg(f, colors = (0,128,0), output_image_name = "f_out.jpg")
 
 # predicting images
-    img = image.load_img(f, target_size=(150, 150))
+    img = image.load_img("f_out.jpg", target_size=(150, 150))
     plt.imshow(img)
     plt.show()
     time.sleep(3)
