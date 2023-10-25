@@ -76,6 +76,7 @@ def evaluate(reconstructed_model):
 	TRAINING_DIR,
 	target_size=(150,150),
         class_mode='categorical',
+        shuffle = False,
         batch_size=126)
 
     batch_size = 126
