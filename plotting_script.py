@@ -3,6 +3,9 @@ import pandas as pd
 from keras.callbacks import CSVLogger
 import numpy as np
 from sklearn.metrics import classification_report, confusion_matrix
+import seaborn as sn
+import matplotlib as plt
+
 
 #Plotting the Training and Testing accuracy                                    
 
@@ -61,6 +64,7 @@ training_datagen = ImageDataGenerator(
 VALIDATION_DIR = "/home/pruthvi/Desktop/tensorflow_project/test_data/rps-test-set/"
 validation_datagen = ImageDataGenerator(rescale = 1./255)
 
+cfm = 0
 
 def evaluate(reconstructed_model):
 
@@ -86,8 +90,26 @@ def evaluate(reconstructed_model):
     y_pred = np.argmax(Y_pred, axis=1)
 
     print(confusion_matrix(validation_generator.classes, y_pred))
+    global cfm
+    cfm = confusion_matrix(validation_generator.classes, y_pred)
+    print(cfm)
 
 
 
-    
 evaluate(reconstructed_model)
+print(cfm)
+print(type(cfm))
+print(cfm.shape)
+#Making matrix look pretty
+
+
+
+classes = ["Paper", "Rock", "Scissors"]
+
+df_cfm = pd.DataFrame(cfm, index = classes, columns = classes)
+plt.figure(figsize = (10,7))
+cfm_plot = sn.heatmap(df_cfm, annot=True, cmap = "Purples", fmt=".3g")
+plt.xlabel("Classifier Prediction")
+plt.ylabel("Actual [Truth]")
+cfm_plot.figure.savefig("confusion_matrix.png")
+
