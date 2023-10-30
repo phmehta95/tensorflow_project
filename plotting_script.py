@@ -5,6 +5,7 @@ import numpy as np
 from sklearn.metrics import classification_report, confusion_matrix
 import seaborn as sn
 import matplotlib as plt
+import dataframe_image as dfi
 
 
 #Plotting the Training and Testing accuracy                                    
@@ -67,6 +68,8 @@ validation_datagen = ImageDataGenerator(rescale = 1./255)
 cfm = 0
 
 def evaluate(reconstructed_model):
+    global validation_generator
+    global y_pred
 
     train_generator = training_datagen.flow_from_directory(
         TRAINING_DIR,
@@ -94,16 +97,22 @@ def evaluate(reconstructed_model):
     cfm = confusion_matrix(validation_generator.classes, y_pred)
     print(cfm)
 
+    #Making Classification Matrix
 
+    print('\n\nClassification Report\n')
+    target_names = ['Rock', 'Paper', 'Scissors']
+    print(classification_report(validation_generator.classes, y_pred, target_names=target_names))
+    global crp
+    crp = classification_report(validation_generator.classes, y_pred, target_names=target_names, output_dict=True)
 
 evaluate(reconstructed_model)
 print(cfm)
 print(type(cfm))
 print(cfm.shape)
-#Making matrix look pretty
 
 
 
+#Making Confusion matrix look pretty
 classes = ["Paper", "Rock", "Scissors"]
 
 df_cfm = pd.DataFrame(cfm, index = classes, columns = classes)
@@ -112,4 +121,10 @@ cfm_plot = sn.heatmap(df_cfm, annot=True, cmap = "Purples", fmt=".3g")
 plt.xlabel("Classifier Prediction")
 plt.ylabel("Actual [Truth]")
 cfm_plot.figure.savefig("confusion_matrix.png")
+
+#Making Classification report look pretty
+df_crp = pd.DataFrame(crp).transpose()
+dfi.export(df_crp, 'classification_report.png', table_conversion='matplotlib')
+
+
 
