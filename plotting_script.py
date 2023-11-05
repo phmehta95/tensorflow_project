@@ -6,6 +6,9 @@ from sklearn.metrics import classification_report, confusion_matrix
 import seaborn as sn
 import matplotlib as plt
 import dataframe_image as dfi
+from yellowbrick.classifier import ClassificationReport
+from sklearn.neighbors import KNeighborsClassifier
+
 
 
 #Plotting the Training and Testing accuracy                                    
@@ -40,7 +43,6 @@ plt.title('Training and validation accuracy and loss')
 plt.legend(loc=0)
 
 
-plt.show()
 
 
 #Function to plot a confusion matrix
@@ -123,8 +125,11 @@ plt.ylabel("Actual [Truth]")
 cfm_plot.figure.savefig("confusion_matrix.png")
 
 #Making Classification report look pretty
-df_crp = pd.DataFrame(crp).transpose()
-dfi.export(df_crp, 'classification_report.png', table_conversion='matplotlib')
+df_crp = pd.DataFrame(crp)
+print(df_crp.to_string())
+crp_plot = df_crp.iloc[:3, :3].T.plot(kind='bar',figsize=(12,7))
+plt.legend(loc='center left', bbox_to_anchor=(1.0, 0.5))
+crp_plot.figure.savefig("classification_report.png")
 
 
-
+plt.show()
