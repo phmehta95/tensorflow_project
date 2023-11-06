@@ -125,11 +125,22 @@ plt.ylabel("Actual [Truth]")
 cfm_plot.figure.savefig("confusion_matrix.png")
 
 #Making Classification report look pretty
+
+#Definition of terms:
+
+#Precision - this is a measure of how exact the classifier is. (No.of true positives)/(Sum of true and false positives)
+#"For all instances 'classified' positive, what percentage is correct?"
+
+
+#Recall - this is a measure of how complete the classifier is : how able it is to correctly find all the true positive instances. (No. of true positives)/(Sum of true positives and false negatives)
+#For all instances that are actually positive, what percentage was classified correctly?"
+
+
+#F1 score - Harmonic mean of precision and recall: 2/(recall^(-1) + precision^(-1))
+
 df_crp = pd.DataFrame(crp)
 print(df_crp.to_string())
 crp_plot = df_crp.iloc[:3, :3].T.plot(kind='bar',figsize=(12,7))
 plt.legend(loc='center left', bbox_to_anchor=(1.0, 0.5))
 crp_plot.figure.savefig("classification_report.png")
-
-
 plt.show()
