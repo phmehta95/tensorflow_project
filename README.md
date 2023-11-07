@@ -21,8 +21,8 @@ The trained model is saved to a HDF5 (.h5) file, so it can be used in different 
 B) plotting_script.py -> This script is responsible for producing plots which allow the user to visualise the performance of their model. This is done by way of the:
 1) Training and validation accuracy and loss plot - Perfomance (accuracy and loss) of the model when training and testing (validation) is shown plotted against the number of epochs (an epoch is one cycle of the model through the training dataset). Also uploaded are these plots made with and without the Dropout layer in the CNN - you can see that without the Dropout layer the validation loss becomes greater than the validation accuracy, which is a symptom of overfitting! This means that when it come to validating the model using the testing dataset, the CNN has focussed on a particular feature of the training dataset so much that it cannot identify unseen data very well. A Dropout layer in the CNN prevents this because the Dropout layer means that the probability of certain inputs not being used in an epoch is <1 (e.g. Dropout(0.5) means that 50% of the time the probability of certain random inputs is set to 0) so that overtraining is unlikely to happen!
 
-2) Classification matrix -> This is a nice handy visualisation of how well the classifier works on the testing dataset, with actual (truth) info on whether the testing image was rock/paper/scissors on the y-axis and the prediction on the x-axis.
-3) Classification report -> This gives a table and an additional bar chart on metrics used to test how well the classifier works, namely, precision, recall and f1-score. These concepts are explained in the code.
+2) Classification matrix - This is a nice handy visualisation of how well the classifier works on the testing dataset, with actual (truth) info on whether the testing image was rock/paper/scissors on the y-axis and the prediction on the x-axis.
+3) Classification report - This gives a table and an additional bar chart on metrics used to test how well the classifier works, namely, precision, recall and f1-score. These concepts are explained in the code.
 
 
 
