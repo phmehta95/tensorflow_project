@@ -2,12 +2,11 @@
 
 Hi! This is a little project I've been working on which uses a CNN (Convolutional Neural Net) to classify images of hands making gestures of either rock, paper, or scissors!
 
-Training dataset: https://storage.googleapis.com/learning-datasets/rps.zip
-Testing dataset: https://storage.googleapis.com/learning-datasets/rps-test-set.zip
+Training dataset: https://storage.googleapis.com/learning-datasets/rps.zip Testing dataset: https://storage.googleapis.com/learning-datasets/rps-test-set.zip
 
 It contains the following scripts:
 
-A) classifyer_script.py -> This is the main script which loads in the testing and training datasets and trains the model. It uses Tensorflow (an open-source platform for machine learning and a symbolic math library that is used for machine learning applications) and Keras (an Open Source Neural Network library which has a very user friendly API) :)
+A) classifier_script.py -> This is the main script which loads in the testing and training datasets and trains the model. It uses Tensorflow (an open-source platform for machine learning and a symbolic math library that is used for machine learning applications) and Keras (an Open Source Neural Network library which has a very user friendly API) :)
 
 The model layers are explained as comments in the code, but I will also list them here:
 0) Type of model - Sequential. This allows us to build our model up layer by layer - this is just a linear stack of layers.
