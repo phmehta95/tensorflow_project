@@ -27,4 +27,4 @@ B) plotting_script.py -> This script is responsible for producing plots which al
 
 
 
-C) image_predictor.py -> This script takes external testing data (e.g. a user's uploaded image of their hand) to classify it. PixelLib is used to give the background a block colour to help the classify focus on the hand in the image. The prediction is output as a simple print statement. 
+C) image_predictor.py -> This script takes external testing data (e.g. a user's uploaded image of their hand) to classify it. PixelLib is used to give the background a block colour to help the classifier focus on the hand in the image. The prediction is output as a simple print statement. 
